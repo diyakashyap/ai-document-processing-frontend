@@ -6,10 +6,10 @@ const apiClient = axios.create({
 });
 console.log(import.meta.env.VITE_API_BASE_URL);
 
-export async function uploadDocuments(payload) {
-  // Replace this mock boundary with POST /uploads when the backend is ready.
-  return Promise.resolve({ data: payload });
-}
+// export async function uploadDocuments(payload) {
+//   // Replace this mock boundary with POST /uploads when the backend is ready.
+//   return Promise.resolve({ data: payload });
+// }
 
 export async function fetchSummaryHistory() {
   // Replace this mock boundary with GET /summaries when the backend is ready.

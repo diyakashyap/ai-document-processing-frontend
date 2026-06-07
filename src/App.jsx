@@ -19,8 +19,14 @@ export default function App() {
   const Page = tabs[activeTab] ?? UploadWorkspace;
 
   async function handleUploadAccepted(files, email) {
-    const response = await getToken(email);
-    console.log("TOKEN RESPONSE:", response.data);
+    const tokenResponse = await getToken(email);
+
+    const uploadResponse = await uploadDocuments(
+    files,
+    tokenResponse.data.access_token
+    );
+
+    console.log("UPLOAD RESPONSE:", uploadResponse.data);
     const nextRecords = createMockUploadRecords(files, email);
     setCurrentEmail(email);
     setRecords((current) => [...nextRecords, ...current]);
