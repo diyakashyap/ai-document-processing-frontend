@@ -26,4 +26,20 @@ export async function getToken(email) {
     email,
   });
 }
+
+export async function uploadDocuments(files, token) {
+  const formData = new FormData();
+
+  files.forEach((file) => {
+    formData.append("files", file);
+  });
+
+  return apiClient.post("/files/upload", formData, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "multipart/form-data",
+    },
+  });
+}
+
 export default apiClient;
