@@ -3,6 +3,7 @@ import { useState } from "react";
 import UploadWorkspace from "./pages/UploadWorkspace.jsx";
 import History from "./pages/History.jsx";
 import { mockSummaryHistory } from "./data/mockData.js";
+import { getToken } from "./services/apiClient.js";
 import { createMockUploadRecords } from "./services/mockUploadService.js";
 
 const tabs = {
