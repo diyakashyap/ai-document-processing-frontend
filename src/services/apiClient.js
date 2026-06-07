@@ -4,6 +4,7 @@ const apiClient = axios.create({
   baseURL: import.meta.env.VITE_API_BASE_URL || "",
   timeout: 30000,
 });
+console.log(import.meta.env.VITE_API_BASE_URL);
 
 export async function uploadDocuments(payload) {
   // Replace this mock boundary with POST /uploads when the backend is ready.
