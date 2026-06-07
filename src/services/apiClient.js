@@ -21,4 +21,9 @@ export async function retrySummaryProcessing(recordId) {
   return Promise.resolve({ data: { recordId } });
 }
 
+export async function getToken(email) {
+  return apiClient.post("/auth/token", {
+    email,
+  });
+}
 export default apiClient;
