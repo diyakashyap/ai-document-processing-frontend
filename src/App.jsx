@@ -47,6 +47,7 @@ export default function App() {
         retryAvailable: false,
         summaryPreview: summaryResponse.data.summary_text,
         summaryText: summaryResponse.data.summary_text,
+        token: tokenResponse.data.access_token,
       };
 
       setCurrentEmail(email);
