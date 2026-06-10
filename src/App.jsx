@@ -30,7 +30,7 @@ export default function App() {
 
   
 const docId = uploadResponse.data.uploaded[0].id;
-alert('Document ID: ${docId}');
+alert(`Document ID: ${docId}`);
 
 // const summaryResponse = await getSummary(
 //   docId,
