@@ -8,15 +8,24 @@ export default function HistoryTable({ records, onRetry }) {
   }
 
   async function handleFileDownload(record) {
-    try {
-      const url = await downloadFile(record.id, record.token);
+  try {
+    const url = await downloadFile(record.id, record.token);
 
-      window.open(url, "_blank");
-    } catch (error) {
-      console.error(error);
-      alert("Failed to download file.");
-    }
+    const link = document.createElement("a");
+
+    link.href = url;
+    link.download = record.fileName;
+
+    document.body.appendChild(link);
+
+    link.click();
+
+    link.remove();
+  } catch (error) {
+    console.error(error);
+    alert("Failed to download file.");
   }
+}
 
   async function handleSummaryDownload(record) {
     try {
