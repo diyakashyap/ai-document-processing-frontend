@@ -69,6 +69,18 @@ export default function UploadWorkspace({ onUploadAccepted }) {
             Upload files
           </button>
         </form>
+            </section>
+
+      <section className="content-panel">
+        <div className="panel-heading">
+          <div>
+            <h2>Generated Summary</h2>
+          </div>
+        </div>
+
+        <div className="summary-placeholder">
+          Upload a document to view its summary here.
+        </div>
       </section>
     </div>
   );
