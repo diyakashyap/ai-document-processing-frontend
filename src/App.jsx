@@ -3,7 +3,7 @@ import { useState } from "react";
 import UploadWorkspace from "./pages/UploadWorkspace.jsx";
 import History from "./pages/History.jsx";
 import { mockSummaryHistory } from "./data/mockData.js";
-import { getToken, uploadDocuments } from "./services/apiClient.js";
+import { getToken, uploadDocuments, getSummary } from "./services/apiClient.js";
 import { createMockUploadRecords } from "./services/mockUploadService.js";
 
 const tabs = {
@@ -26,7 +26,7 @@ export default function App() {
     tokenResponse.data.access_token
     );
 
-    
+
 
   
 const docId = uploadResponse.data.uploaded[0].id;
