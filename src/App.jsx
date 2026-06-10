@@ -30,14 +30,13 @@ export default function App() {
 
   
 const docId = uploadResponse.data.uploaded[0].id;
-alert(`Document ID: ${docId}`);
 
-// const summaryResponse = await getSummary(
-//   docId,
-//   tokenResponse.data.access_token
-// );
+const summaryResponse = await getSummary(
+  docId,
+  tokenResponse.data.access_token
+);
 
-// console.log("SUMMARY:", summaryResponse.data);
+console.log("SUMMARY:", summaryResponse.data);
 
 
 
