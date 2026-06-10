@@ -15,6 +15,7 @@ export default function App() {
   const [activeTab, setActiveTab] = useState("upload");
   const [records, setRecords] = useState(mockSummaryHistory);
   const [currentEmail, setCurrentEmail] = useState("");
+  const [summary, setSummary] = useState("");
 
   const Page = tabs[activeTab] ?? UploadWorkspace;
 
@@ -37,6 +38,7 @@ const summaryResponse = await getSummary(
 );
 
 console.log("SUMMARY:", summaryResponse.data);
+setSummary(summaryResponse.data.summary_text);
 
 
 
@@ -69,6 +71,7 @@ console.log("SUMMARY:", summaryResponse.data);
       <Page
         records={records}
         currentEmail={currentEmail}
+        summary={summary}
         onUploadAccepted={handleUploadAccepted}
         onRetry={handleRetry}
         onNavigate={setActiveTab}
