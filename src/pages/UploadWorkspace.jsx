@@ -2,7 +2,10 @@ import { useState } from "react";
 import FileDropzone from "../components/upload/FileDropzone.jsx";
 import { validateUploadRequest } from "../utils/fileValidation.js";
 
-export default function UploadWorkspace({ onUploadAccepted }) {
+export default function UploadWorkspace({ 
+  onUploadAccepted,
+  summary,
+}) {
   const [email, setEmail] = useState("");
   const [files, setFiles] = useState([]);
   const [errors, setErrors] = useState([]);
@@ -78,8 +81,15 @@ export default function UploadWorkspace({ onUploadAccepted }) {
           </div>
         </div>
 
+
+        
+
         <div className="summary-placeholder">
-          Upload a document to view its summary here.
+          {summary ? (
+            <p>{summary}</p>
+          ) : (
+            "Upload a document to view its summary here."
+          )}
         </div>
       </section>
     </div>
