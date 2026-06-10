@@ -2,9 +2,7 @@ import AppShell from "./components/layout/AppShell.jsx";
 import { useState } from "react";
 import UploadWorkspace from "./pages/UploadWorkspace.jsx";
 import History from "./pages/History.jsx";
-import { mockSummaryHistory } from "./data/mockData.js";
 import { getToken, uploadDocuments, getSummary } from "./services/apiClient.js";
-import { createMockUploadRecords } from "./services/mockUploadService.js";
 
 const tabs = {
   upload: UploadWorkspace,
@@ -13,42 +11,53 @@ const tabs = {
 
 export default function App() {
   const [activeTab, setActiveTab] = useState("upload");
-  const [records, setRecords] = useState(mockSummaryHistory);
+  const [records, setRecords] = useState([]);
   const [currentEmail, setCurrentEmail] = useState("");
   const [summary, setSummary] = useState("");
 
   const Page = tabs[activeTab] ?? UploadWorkspace;
 
   async function handleUploadAccepted(files, email) {
-    const tokenResponse = await getToken(email);
+    try {
+      const tokenResponse = await getToken(email);
 
-    const uploadResponse = await uploadDocuments(
-    files,
-    tokenResponse.data.access_token
-    );
+      const uploadResponse = await uploadDocuments(
+        files,
+        tokenResponse.data.access_token
+      );
 
+      const uploadedDocument = uploadResponse.data.uploaded[0];
 
+      const summaryResponse = await getSummary(
+        uploadedDocument.id,
+        tokenResponse.data.access_token
+      );
 
-  
-const docId = uploadResponse.data.uploaded[0].id;
+      console.log("SUMMARY:", summaryResponse.data);
 
-const summaryResponse = await getSummary(
-  docId,
-  tokenResponse.data.access_token
-);
+      setSummary(summaryResponse.data.summary_text);
 
-console.log("SUMMARY:", summaryResponse.data);
-setSummary(summaryResponse.data.summary_text);
+      const historyRecord = {
+        id: uploadedDocument.id,
+        fileName: uploadedDocument.doc_name,
+        email,
+        uploadedAt: uploadedDocument.uploaded_at,
+        size: uploadedDocument.doc_size_bytes,
+        status: uploadedDocument.status,
+        retryAvailable: false,
+        summaryPreview: summaryResponse.data.summary_text,
+        summaryText: summaryResponse.data.summary_text,
+      };
 
+      setCurrentEmail(email);
 
+      setRecords((current) => [historyRecord, ...current]);
 
-
-
-
-    console.log("UPLOAD RESPONSE:", uploadResponse.data);
-    const nextRecords = createMockUploadRecords(files, email);
-    setCurrentEmail(email);
-    setRecords((current) => [...nextRecords, ...current]);
+      console.log("UPLOAD RESPONSE:", uploadResponse.data);
+    } catch (error) {
+      console.error(error);
+      alert("Failed to upload document.");
+    }
   }
 
   function handleRetry(recordId) {
@@ -59,7 +68,8 @@ setSummary(summaryResponse.data.summary_text);
               ...record,
               status: "Processing",
               retryAvailable: false,
-              summaryPreview: "Retry queued. The final summary will appear after processing completes.",
+              summaryPreview:
+                "Retry queued. The final summary will appear after processing completes.",
             }
           : record
       )
