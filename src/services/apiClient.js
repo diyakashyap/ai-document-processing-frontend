@@ -42,4 +42,12 @@ export async function uploadDocuments(files, token) {
   });
 }
 
+export async function getSummary(docId, token) {
+  return apiClient.get(`/files/${docId}/summary`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+}
+
 export default apiClient;
