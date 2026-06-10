@@ -350,7 +350,7 @@ button:disabled {
 
 .two-column {
   display: grid;
-  grid-template-columns: minmax(0, 1.45fr) minmax(280px, 0.55fr);
+  grid-template-columns: minmax(0, 1fr) minmax(350px, 1.5fr);
   gap: 20px;
 }
 
