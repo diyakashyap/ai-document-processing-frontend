@@ -26,6 +26,23 @@ export default function App() {
     tokenResponse.data.access_token
     );
 
+    
+
+  
+const docId = uploadResponse.data.uploaded[0].id;
+
+const summaryResponse = await getSummary(
+  docId,
+  tokenResponse.data.access_token
+);
+
+console.log("SUMMARY:", summaryResponse.data);
+
+
+
+
+
+
     console.log("UPLOAD RESPONSE:", uploadResponse.data);
     const nextRecords = createMockUploadRecords(files, email);
     setCurrentEmail(email);
