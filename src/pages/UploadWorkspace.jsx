@@ -27,7 +27,7 @@ export default function UploadWorkspace({ onUploadAccepted }) {
   }
 
   return (
-    <div className="single-column">
+    <div className="two-column">
       <section className="content-panel">
         <div className="panel-heading">
           <div>
