@@ -96,6 +96,7 @@ setRecords(historyRecords);
       };
 
       setCurrentEmail(email);
+      localStorage.setItem("email", email);
 
       setRecords((current) => [historyRecord, ...current]);
 
