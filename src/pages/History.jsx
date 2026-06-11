@@ -17,7 +17,7 @@ export default function History({ records, currentEmail, onRetry, onNavigate }) 
   }, [activeFilter, currentEmail, records]);
 
   console.log("Current Email:", currentEmail);
-  console.log("Records:", records);
+  console.log("First Record:", records[0]);
 
   if (!currentEmail) {
     return (
