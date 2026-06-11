@@ -30,7 +30,20 @@ export default function App() {
     try {
       const response = await listFiles(token);
 
-      console.log("FILES RESPONSE:", response.data);
+      const historyRecords = response.data.map((document) => ({
+          id: document.id,
+          fileName: document.doc_name,
+          email: currentEmail,
+          uploadedAt: document.uploaded_at,
+          size: document.doc_size_bytes,
+          status: document.status,
+          retryAvailable: false,
+          summaryPreview: "",
+          summaryText: "",
+          token,
+        }));
+
+setRecords(historyRecords);
     } catch (error) {
       console.error("Failed to load history:", error);
     }
