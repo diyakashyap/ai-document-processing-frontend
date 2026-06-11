@@ -44,6 +44,14 @@ export async function getSummary(docId, token) {
   });
 }
 
+export async function listFiles(token) {
+  return apiClient.get("/files", {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+}
+
 export async function downloadFile(docId, token) {
   const response = await apiClient.get(`/files/${docId}/download`, {
     headers: {
