@@ -16,6 +16,9 @@ export default function History({ records, currentEmail, onRetry, onNavigate }) 
     return userRecords.filter((record) => new Date(record.uploadedAt) >= cutoff);
   }, [activeFilter, currentEmail, records]);
 
+  console.log("Current Email:", currentEmail);
+  console.log("Records:", records);
+
   if (!currentEmail) {
     return (
       <section className="content-panel wide">
