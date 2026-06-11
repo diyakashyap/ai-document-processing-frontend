@@ -1,8 +1,13 @@
 import AppShell from "./components/layout/AppShell.jsx";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import UploadWorkspace from "./pages/UploadWorkspace.jsx";
 import History from "./pages/History.jsx";
-import { getToken, uploadDocuments, getSummary } from "./services/apiClient.js";
+import {
+  getToken,
+  uploadDocuments,
+  getSummary,
+  listFiles,
+} from "./services/apiClient.js";
 
 const tabs = {
   upload: UploadWorkspace,
@@ -15,6 +20,24 @@ export default function App() {
   const [currentEmail, setCurrentEmail] = useState("");
   const [summary, setSummary] = useState("");
   const [token, setToken] = useState("");
+
+  useEffect(() => {
+  async function loadHistory() {
+    if (!token) {
+      return;
+    }
+
+    try {
+      const response = await listFiles(token);
+
+      console.log("FILES RESPONSE:", response.data);
+    } catch (error) {
+      console.error("Failed to load history:", error);
+    }
+  }
+
+  loadHistory();
+}, [token]);
 
   const Page = tabs[activeTab] ?? UploadWorkspace;
 
