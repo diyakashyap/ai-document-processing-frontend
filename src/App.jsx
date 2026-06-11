@@ -23,7 +23,7 @@ export default function App() {
 
   useEffect(() => {
   async function loadHistory() {
-    if (!token) {
+    if (!token || !currentEmail) {
       return;
     }
 
@@ -50,7 +50,7 @@ setRecords(historyRecords);
   }
 
   loadHistory();
-}, [token]);
+}, [token, currentEmail]);
 
   const Page = tabs[activeTab] ?? UploadWorkspace;
 
