@@ -17,9 +17,13 @@ const tabs = {
 export default function App() {
   const [activeTab, setActiveTab] = useState("upload");
   const [records, setRecords] = useState([]);
-  const [currentEmail, setCurrentEmail] = useState("");
+  const [currentEmail, setCurrentEmail] = useState(
+    localStorage.getItem("email") || ""
+  );
   const [summary, setSummary] = useState("");
-  const [token, setToken] = useState("");
+  const [token, setToken] = useState(
+    localStorage.getItem("token") || ""
+  );
 
   useEffect(() => {
   async function loadHistory() {
@@ -58,6 +62,10 @@ setRecords(historyRecords);
     try {
       const tokenResponse = await getToken(email);
       setToken(tokenResponse.data.access_token);
+    localStorage.setItem(
+      "token",
+      tokenResponse.data.access_token
+      );
       const uploadResponse = await uploadDocuments(
         files,
         tokenResponse.data.access_token
