@@ -5,6 +5,7 @@ const apiClient = axios.create({
   timeout: 30000,
 });
 
+
 console.log(import.meta.env.VITE_API_BASE_URL);
 
 export async function fetchSummaryHistory() {

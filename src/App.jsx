@@ -14,13 +14,14 @@ export default function App() {
   const [records, setRecords] = useState([]);
   const [currentEmail, setCurrentEmail] = useState("");
   const [summary, setSummary] = useState("");
+  const [token, setToken] = useState("");
 
   const Page = tabs[activeTab] ?? UploadWorkspace;
 
   async function handleUploadAccepted(files, email) {
     try {
       const tokenResponse = await getToken(email);
-
+      setToken(tokenResponse.data.access_token);
       const uploadResponse = await uploadDocuments(
         files,
         tokenResponse.data.access_token
